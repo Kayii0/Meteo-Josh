@@ -7,10 +7,14 @@
     <title>weather-frontend</title>
   </head>
   <body>
-    <input type="text" id="cityInput" placeholder="Enter city name" />
-    <button id="fetchWeatherBtn">Get Weather</button>
+  <div class="card">
+    <h1>Météo en direct</h1>
+    <div class="search-row">
+      <input type="text" id="cityInput" placeholder="Nom de la ville" />
+      <button id="fetchWeatherBtn">Chercher</button>
+    </div>
     <div id="results"></div>
-    <!-- <div id="app"></div> -->
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
 </html>

@@ -11,16 +11,25 @@ fetchWeatherBtn.addEventListener('click', async () => {
   const data = await response.json()
 
   if (!response.ok) {
-    resultsDiv.innerHTML = `<p>Error: ${data.detail}</p>`
+    resultsDiv.innerHTML = `<p class="error-message">${data.detail}</p>`
     return
   }
 
+const windIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h11a3 3 0 1 0-3-3"/><path d="M3 14h15a3 3 0 1 1-3 3"/></svg>`
+const dropletIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c4 5 7 8.5 7 12.5a7 7 0 1 1-14 0C5 10.5 8 7 12 2Z"/></svg>`
+const sunIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>`
+
+
 // le parametre current obligatoire pr accéder aux données sinon ça ecrit undefined, dans l'url dans le backend on retrouve ce param current !!
   resultsDiv.innerHTML = `
-    <h2>Weather in ${data.location}</h2>
-    <p>Temperature: ${data.current.temperature_2m}°C</p>
-    <p>Humidity: ${data.current.relative_humidity_2m}%</p>
-    <p>Wind Speed: ${data.current.wind_speed_10m} m/s</p>
-    <p>UV Index: ${data.current.uv_index}</p>
-  `
+  <div class="weather-card">
+    <h2>${data.location}</h2>
+    <div class="weather-temp">${data.current.temperature_2m}°C</div>
+    <div class="weather-details">
+      <p>${windIcon} ${data.current.wind_speed_10m} km/h</p>
+      <p>${dropletIcon} ${data.current.relative_humidity_2m}%</p>
+      <p>${sunIcon} UV ${data.current.uv_index}</p>
+    </div>
+  </div>
+`
 })

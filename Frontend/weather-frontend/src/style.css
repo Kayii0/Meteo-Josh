@@ -1,66 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
+  --sky-top: #4A90D9;
+  --sky-bottom: #7EC8E3;
+  --sun: #FFC857;
+  --coral: #FF6B6B;
+  --card-bg: rgba(255, 255, 255, 0.92);
+  --text-dark: #1A2B3C;
+  --text-muted: #5C7080;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --heading: 'Baloo 2', sans-serif;
+  --body: 'Inter', sans-serif;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  font-family: var(--body);
+  color: var(--text-dark);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(135deg, var(--sky-top), var(--sky-bottom), var(--sun));
+  background-size: 200% 200%;
+  animation: skyShift 12s ease-in-out infinite;
 }
 
-h1,
-h2 {
+@keyframes skyShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 24px;
+  padding: 32px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+h1 {
   font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+  font-size: 28px;
+  margin: 0 0 24px;
+  text-align: center;
+  color: var(--text-dark);
 }
 
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
+.search-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
 }
 
-p {
+input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  font-size: 16px;
+  font-family: var(--body);
+  background: #F0F4F8;
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input:focus {
+  border-color: var(--sky-top);
+}
+
+button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 12px;
+  background: var(--sun);
+  color: var(--text-dark);
+  font-family: var(--heading);
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--sky-top);
+  outline-offset: 2px;
+}
+
+#results {
+  margin-top: 20px;
+}
+
+#results:empty {
+  margin-top: 0;
+}
+
+.weather-card {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.weather-card h2 {
+  font-family: var(--heading);
+  font-size: 22px;
+  margin: 0 0 12px;
+}
+
+.weather-temp {
+  font-size: 48px;
+  font-weight: 700;
+  font-family: var(--heading);
+  color: var(--sky-top);
+  margin: 8px 0;
+}
+
+.weather-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.weather-details p {
   margin: 0;
+  padding: 10px;
+  background: #F0F4F8;
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.error-message {
+  color: var(--coral);
+  font-weight: 500;
+  text-align: center;
+}
+
+.weather-details p {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.weather-details svg {
+  color: var(--sky-top);
+  flex-shrink: 0;
 }
