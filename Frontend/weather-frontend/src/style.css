@@ -163,3 +163,41 @@ button:focus-visible {
   color: var(--sky-top);
   flex-shrink: 0;
 }
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.forecast {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #E5E9EE;
+}
+
+.day {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  background: #F0F4F8;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+.day-date {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.day-temps {
+  font-family: var(--heading);
+  font-weight: 600;
+  color: var(--text-dark);
+}
