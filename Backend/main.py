@@ -22,13 +22,24 @@ def get_coordinates(loc):
 
 
 def get_weather(lat, lon):
-    url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current=temperature_2m,wind_speed_10m,relative_humidity_2m,weather_code,uv_index&timezone=auto"
-    try:
+    url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current=temperature_2m,wind_speed_10m,relative_humidity_2m,weather_code,uv_index&timezone=auto&daily=temperature_2m_max,temperature_2m_min,weather_code&forecast_days=7"
+    try:    
         response = requests.get(url)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException:
         raise HTTPException(status_code=503, detail="Weather service unavailable.")
+
+@app.get("/weather/coords")
+def weather_coords(lat: float, lon: float):
+    weather_data = get_weather(lat, lon)
+
+    return {
+        "latitude": lat,
+        "longitude": lon,
+        "current": weather_data.get("current", {}),
+        "daily": weather_data.get("daily", {}),
+    }
 
 @app.get("/weather/{loc}")
 def weather(loc: str):
@@ -48,4 +59,6 @@ def weather(loc: str):
         "latitude": location_data["latitude"],
         "longitude": location_data["longitude"],
         "current": weather_data.get("current", {}),
+        "daily": weather_data.get("daily", {}),
     }
+
