@@ -1,7 +1,8 @@
 import './style.css'
 
 const cityInput = document.querySelector<HTMLInputElement>('#cityInput')!
-const fetchWeatherBtn = document.querySelector<HTMLButtonElement>('#fetchWeatherBtn')!
+const submitBtn = document.querySelector<HTMLButtonElement>('#fetchWeatherBtn')!
+const searchForm = document.querySelector<HTMLFormElement>('#searchForm')!
 const resultsDiv = document.querySelector<HTMLDivElement>('#results')!
 
 // incon
@@ -12,11 +13,13 @@ const sunIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" str
 
 
 // le parametre current obligatoire pr accéder aux données sinon ça ecrit undefined, dans l'url dans le backend on retrouve ce param current !!
-fetchWeatherBtn.addEventListener('click', async () => {
+searchForm.addEventListener('submit', async (event) => {
+  event.preventDefault()
+
   const city = cityInput.value
 
-  fetchWeatherBtn.disabled = true
-  fetchWeatherBtn.textContent = 'Recherche...'
+  submitBtn.disabled = true
+  submitBtn.textContent = 'Chargement...'
   resultsDiv.innerHTML = ''
 
   try {
@@ -54,8 +57,8 @@ fetchWeatherBtn.addEventListener('click', async () => {
       </div>
     `
   } finally {
-    fetchWeatherBtn.disabled = false
-    fetchWeatherBtn.textContent = 'Chercher'
+    submitBtn.disabled = false
+    submitBtn.textContent = 'Chercher'
   }
 })
 

@@ -9,10 +9,10 @@
   <body>
   <div class="card">
     <h1>Météo en direct</h1>
-    <div class="search-row">
-      <input type="text" id="cityInput" placeholder="Nom de la ville" />
-      <button id="fetchWeatherBtn">Chercher</button>
-    </div>
+    <form id="searchForm">
+      <input type="text" id="cityInput" placeholder="Nom de la ville"/>
+      <button type="submit" id="fetchWeatherBtn">Chercher</button>
+    </form>
     <div id="results"></div>
   </div>
   <script type="module" src="/src/main.ts"></script>
