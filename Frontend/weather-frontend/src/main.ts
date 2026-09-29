@@ -9,7 +9,7 @@ const resultsDiv = document.querySelector<HTMLDivElement>('#results')!
 const windIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h11a3 3 0 1 0-3-3"/><path d="M3 14h15a3 3 0 1 1-3 3"/></svg>`
 const dropletIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c4 5 7 8.5 7 12.5a7 7 0 1 1-14 0C5 10.5 8 7 12 2Z"/></svg>`
 const sunIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>`
-
+const moonIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>`
 
 
 // le parametre current obligatoire pr accéder aux données sinon ça ecrit undefined, dans l'url dans le backend on retrouve ce param current !!
@@ -50,7 +50,7 @@ searchForm.addEventListener('submit', async (event) => {
           <p>${windIcon} ${data.current.wind_speed_10m} km/h</p>
           <p>${dropletIcon} ${data.current.relative_humidity_2m}%</p>
           <p>${sunIcon} UV ${data.current.uv_index}</p>
-          <p>${data.current.is_day ? 'Jour' : 'Nuit'}</p>
+          <p>${moonIcon} ${data.current.is_day ? 'Jour' : 'Nuit'}</p>
         </div>
         <div class="forecast">
           ${html}
@@ -95,7 +95,7 @@ navigator.geolocation.getCurrentPosition(
             <p>${windIcon} ${data.current.wind_speed_10m} km/h</p>
             <p>${dropletIcon} ${data.current.relative_humidity_2m}%</p>
             <p>${sunIcon} UV ${data.current.uv_index}</p>
-            <p>${data.current.is_day ? 'Jour' : 'Nuit'}</p>
+            <p>${moonIcon} ${data.current.is_day ? 'Jour' : 'Nuit'}</p>
           </div>
           <div class="forecast">
             ${html}
