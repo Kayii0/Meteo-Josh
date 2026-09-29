@@ -201,3 +201,20 @@ button:disabled {
   font-weight: 600;
   color: var(--text-dark);
 }
+
+.weather-time {
+  font-size: 14px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+footer {
+  text-align: center;
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--text-muted);
+}

@@ -45,6 +45,7 @@ searchForm.addEventListener('submit', async (event) => {
     resultsDiv.innerHTML = `
       <div class="weather-card">
         <h2>${data.location}</h2>
+        <div class="weather-time">Heure actuelle: ${data.current.time.split('T')[1]}</div>
         <div class="weather-temp">${data.current.temperature_2m}°C</div>
         <div class="weather-details">
           <p>${windIcon} ${data.current.wind_speed_10m} km/h</p>
@@ -90,6 +91,7 @@ navigator.geolocation.getCurrentPosition(
       resultsDiv.innerHTML = `
         <div class="weather-card">
           <h2>Ma position</h2>
+          <div class="weather-time">Heure actuelle: ${data.current.time.split('T')[1]}</div>
           <div class="weather-temp">${data.current.temperature_2m}°C</div>
           <div class="weather-details">
             <p>${windIcon} ${data.current.wind_speed_10m} km/h</p>
