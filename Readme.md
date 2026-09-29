@@ -1,53 +1,54 @@
-# 🌦️ Météo en direct
+# 🌤️ Weather App
 
-Une application météo en temps réel, avec recherche par ville ou géolocalisation automatique, prévisions sur 7 jours, et une interface colorée et animée.
+A real-time weather application with a Python (FastAPI) backend and a TypeScript (Vite) frontend, powered by the free [Open-Meteo](https://open-meteo.com/) API.
 
-## ✨ Fonctionnalités
+## Features
 
-- 🔍 Recherche de la météo par nom de ville
-- 📍 Géolocalisation automatique au chargement de la page
-- 🌡️ Météo actuelle : température, vent, humidité, indice UV
-- 📅 Prévisions sur 7 jours (températures min/max)
-- 🕐 Heure locale de la ville recherchée
-- ⚠️ Gestion des erreurs (ville introuvable, service indisponible)
-- 🎨 Interface colorée avec dégradé animé
+- 🔍 Search current weather by city name
+- 📍 Automatic weather for your current location (browser geolocation)
+- 📅 7-day forecast (max/min temperature per day)
+- 💨 Wind speed, humidity, and UV index
+- 🌗 Day/night indicator
+- 🎨 Colorful, animated gradient UI with custom SVG icons
+- ⚠️ Graceful error handling (city not found, weather service unavailable)
 
-## 🛠️ Stack technique
+## Tech Stack
 
 **Backend**
-- [Python](https://www.python.org/) avec [FastAPI](https://fastapi.tiangolo.com/)
-- [Requests](https://requests.readthedocs.io/) pour les appels à l'API météo
-- [Uvicorn](https://www.uvicorn.org/) comme serveur ASGI
+- [Python](https://www.python.org/)
+- [FastAPI](https://fastapi.tiangolo.com/)
+- [Uvicorn](https://www.uvicorn.org/) (ASGI server)
+- [Requests](https://requests.readthedocs.io/)
 
 **Frontend**
 - [TypeScript](https://www.typescriptlang.org/)
-- [Vite](https://vite.dev/) comme outil de build
+- [Vite](https://vite.dev/)
 
-**API météo**
-- [Open-Meteo](https://open-meteo.com/) — API gratuite, sans clé requise, pour le géocodage et les données météorologiques
+**API**
+- [Open-Meteo](https://open-meteo.com/) — free weather & geocoding API, no key required
 
-## 📁 Structure du projet
+## Project Structure
 
 ```
 Weather/
 ├── Backend/
-│   └── main.py              # API FastAPI (géocodage + météo)
+│   └── main.py          # FastAPI app: geocoding + weather routes
 └── Frontend/
     └── weather-frontend/
         ├── index.html
         └── src/
-            ├── main.ts       # Logique de l'application
-            └── style.css     # Styles
+            ├── main.ts   # App logic (fetch, DOM, geolocation)
+            └── style.css # Styling
 ```
 
-## 🚀 Installation et lancement
+## Getting Started
 
-### Prérequis
+### Prerequisites
 
-- [Python 3](https://www.python.org/downloads/) installé
-- [Node.js](https://nodejs.org/) installé (inclut npm)
+- Python 3.9+
+- Node.js (with npm)
 
-### Backend
+### Backend setup
 
 ```bash
 cd Backend
@@ -55,11 +56,9 @@ pip install fastapi uvicorn requests
 python3 -m uvicorn main:app --reload
 ```
 
-Le serveur backend tourne sur `http://127.0.0.1:8000`.
+The API will be running at `http://127.0.0.1:8000`. Interactive docs are available at `http://127.0.0.1:8000/docs`.
 
-### Frontend
-
-Dans un second terminal :
+### Frontend setup
 
 ```bash
 cd Frontend/weather-frontend
@@ -67,22 +66,21 @@ npm install
 npm run dev
 ```
 
-L'application est accessible sur `http://localhost:5173` (le port peut varier selon disponibilité).
+The app will be running at `http://localhost:5173` (or another port if that one is busy — check your terminal output and update the backend's CORS settings accordingly).
 
-## 📡 Routes de l'API
+## API Endpoints
 
-| Méthode | Route | Description |
-|---|---|---|
-| `GET` | `/weather/{ville}` | Météo actuelle et prévisions pour une ville donnée |
-| `GET` | `/weather/coords?lat={lat}&lon={lon}` | Météo actuelle et prévisions pour des coordonnées données |
+| Method | Route | Description |
+|--------|-------|-------------|
+| `GET` | `/weather/{city}` | Get current weather + 7-day forecast for a city name |
+| `GET` | `/weather/coords?lat={lat}&lon={lon}` | Get current weather + 7-day forecast for coordinates |
 
-La documentation interactive complète de l'API est disponible sur `http://127.0.0.1:8000/docs` une fois le backend lancé.
+## Possible Future Improvements
 
-## 📝 Notes
+- [ ] Search history (recently searched cities)
+- [ ] Configurable units (°C/°F, km/h/mph)
+- [ ] Deploy backend and frontend online
 
-- L'API Open-Meteo ne nécessite aucune clé d'authentification, l'application fonctionne donc sans configuration de variables d'environnement.
-- Le CORS doit être configuré côté backend pour autoriser l'origine du frontend (voir `main.py`).
+## License
 
-## 👤 Auteur
-
-Projet réalisé par Joshua Fournet-Fayard dans le cadre de l'apprentissage de Python, FastAPI et TypeScript.
+This project is open source and available under the [MIT License](LICENSE).
