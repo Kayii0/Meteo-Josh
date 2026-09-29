@@ -50,6 +50,7 @@ searchForm.addEventListener('submit', async (event) => {
           <p>${windIcon} ${data.current.wind_speed_10m} km/h</p>
           <p>${dropletIcon} ${data.current.relative_humidity_2m}%</p>
           <p>${sunIcon} UV ${data.current.uv_index}</p>
+          <p>${data.current.is_day ? 'Jour' : 'Nuit'}</p>
         </div>
         <div class="forecast">
           ${html}
@@ -94,6 +95,7 @@ navigator.geolocation.getCurrentPosition(
             <p>${windIcon} ${data.current.wind_speed_10m} km/h</p>
             <p>${dropletIcon} ${data.current.relative_humidity_2m}%</p>
             <p>${sunIcon} UV ${data.current.uv_index}</p>
+            <p>${data.current.is_day ? 'Jour' : 'Nuit'}</p>
           </div>
           <div class="forecast">
             ${html}

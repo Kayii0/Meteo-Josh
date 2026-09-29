@@ -22,7 +22,7 @@ def get_coordinates(loc):
 
 
 def get_weather(lat, lon):
-    url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current=temperature_2m,wind_speed_10m,relative_humidity_2m,weather_code,uv_index&timezone=auto&daily=temperature_2m_max,temperature_2m_min,weather_code&forecast_days=7"
+    url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current=temperature_2m,wind_speed_10m,relative_humidity_2m,weather_code,uv_index,is_day&timezone=auto&daily=temperature_2m_max,temperature_2m_min,weather_code&forecast_days=7"
     try:    
         response = requests.get(url)
         response.raise_for_status()
