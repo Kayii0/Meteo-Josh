@@ -11,8 +11,38 @@ const dropletIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none"
 const sunIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>`
 const moonIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>`
 
+const weatherIcons: Record<number, string> = {
+  0: '☀️',
+  1: '🌤️',
+  2: '⛅',
+  3: '☁️',
+  45: '🌫️',
+  48: '🌫️',
+  51: '🌦️',
+  53: '🌦️',
+  55: '🌧️',
+  56: '🌧️',
+  57: '🌧️', 
+  61: '🌧️',
+  63: '🌧️',
+  65: '🌧️',
+  66: '🌧️',
+  67: '🌧️',
+  71: '❄️',
+  73: '❄️',
+  75: '❄️',
+  77: '❄️',
+  80: '🌦️',
+  81: '🌦️',
+  82: '🌧️',
+  85: '❄️',
+  86: '❄️',
+  95: '⛈️',
+  96: '⛈️',
+  99: '⛈️'
+}
 
-// le parametre current obligatoire pr accéder aux données sinon ça ecrit undefined, dans l'url dans le backend on retrouve ce param current !!
+// le parametre current obligatoire pr accéder aux données sinon ça ecrit undefined, dans l'url dans le backend on retrouve ce param current mais ça pourrait être hourly  !!
 searchForm.addEventListener('submit', async (event) => {
   event.preventDefault()
 
@@ -39,14 +69,16 @@ searchForm.addEventListener('submit', async (event) => {
     <span class="day-temps">${data.daily.temperature_2m_max[index]}° / ${data.daily.temperature_2m_min[index]}°</span>
   </div>`
 })
+  
 
+    const weatherIcon = weatherIcons[data.current.weather_code] ?? '⛱️'
     const html = jours.join('')
 
     resultsDiv.innerHTML = `
       <div class="weather-card">
         <h2>${data.location}</h2>
         <div class="weather-time">Heure actuelle: ${data.current.time.split('T')[1]}</div>
-        <div class="weather-temp">${data.current.temperature_2m}°C</div>
+        <div class="weather-temp">${data.current.temperature_2m}°C ${weatherIcon}</div>
         <div class="weather-details">
           <p>${windIcon} ${data.current.wind_speed_10m} km/h</p>
           <p>${dropletIcon} ${data.current.relative_humidity_2m}%</p>
@@ -87,17 +119,18 @@ navigator.geolocation.getCurrentPosition(
 })
 
     const html = jours.join('')
+    const weatherIcon = weatherIcons[data.current.weather_code] ?? '⛱️'
 
       resultsDiv.innerHTML = `
         <div class="weather-card">
           <h2>Ma position</h2>
           <div class="weather-time">Heure actuelle: ${data.current.time.split('T')[1]}</div>
-          <div class="weather-temp">${data.current.temperature_2m}°C</div>
+          <div class="weather-temp">${data.current.temperature_2m}°C ${weatherIcon}</div>
           <div class="weather-details">
             <p>${windIcon} ${data.current.wind_speed_10m} km/h</p>
             <p>${dropletIcon} ${data.current.relative_humidity_2m}%</p>
             <p>${sunIcon} UV ${data.current.uv_index}</p>
-            <p>${moonIcon} ${data.current.is_day ? 'Jour' : 'Nuit'}</p>
+            <p>${moonIcon} ${data.current.is_day ? 'Jour' : 'Nuit'}
           </div>
           <div class="forecast">
             ${html}
